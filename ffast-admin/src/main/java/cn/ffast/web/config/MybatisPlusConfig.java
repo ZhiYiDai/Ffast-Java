@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan(basePackages={"com.hubi.**.dao.**","cn.ffast.**.dao.**"})
+@MapperScan(basePackages={"cn.ffast.**.dao.**"})
 public class MybatisPlusConfig {
 
     /**
