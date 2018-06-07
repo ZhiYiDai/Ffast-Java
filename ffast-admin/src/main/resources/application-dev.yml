@@ -1,0 +1,60 @@
+server:
+  port: 8080
+  #servlet:
+    #contextPath: /api/
+spring:
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/ffast?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    druid:
+      initialSize: 1
+      maxActive: 10
+      minIdle: 1
+      maxWait: 60000
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+
+    enabled: true
+    host: 127.0.0.1
+    port: 6379
+    #password: 123465
+    #过期时间（秒）
+    expirationSecond: 0
+    #序列号方式 默认0   0:"FastJSON",1:"JackJson",2:"Msgpack"
+    serializerType: 2
+
+mybatis-plus:
+  global-config:
+    #刷新mapper 调试神器
+    refresh-mapper: true
+
+#日志配置
+logging:
+  config: classpath:dev/logback.xml
+
+auth:
+  pwdDefault: '123456'
+  #是否开启验证码
+  captchaEnable: true
+  #0使用jwt 1使用redis
+  type: 1
+  #过期时间（秒）
+  expirationSecond: 86400
+  jwt:
+    secret: 'ggs6fad5as6d5sa#dddfg2ddd$fdd$d@dd'
+
+
+#上传配置
+upload:
+ filesBasePath: 'files/'
+ uploadUrl: 'http://127.0.1.1:8030/'
+
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="pwd" property="pwd"/>
+        <result column="email" property="email"/>
+        <result column="tel" property="tel"/>
+        <result column="is_lock" property="isLock"/>
+        <result column="lock_time" property="lockTime"/>
+        <result column="login_count" property="loginCount"/>
+        <result column="login_failure_count" property="loginFailureCount"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_modify_time" property="lastModifyTime"/>
+        <result column="last_modifier_id" property="lastModifierId"/>
+    </resultMap>
+
+    <select id="listByPage" resultType="cn.ffast.web.entity.sys.User">
+        select a.id,a.username,a.name,a.status,a.email,a.tel,a.is_lock,a.lock_time,a.login_count,a.login_failure_count,
+        a.login_ip,a.login_time,a.creator_id,a.create_time,a.last_modify_time,a.last_modifier_id,
+        (select group_concat(role_id) from t_sys_user_role where user_id=a.id) as roleId
+        from t_sys_user a
+        left join t_sys_user_role b on a.id=b.user_id
+        <where>
+            <if test="roleId != null and roleId!='' ">
+                AND b.role_id in (${roleId})
+            </if>
+            <if test="username != null and username!='' ">
+                AND a.username like '%${username}%'
+            </if>
+            <if test="name != null and name!='' ">
+                AND a.name like '%${name}%'
+            </if>
+            <if test="email != null and email!='' ">
+                AND a.email like '%${email}%'
+            </if>
+            <if test="tel != null and tel!='' ">
+                AND a.tel like '%${tel}%'
+            </if>
+            <if test="status != null">
+                AND a.status = #{status}
+            </if>
+            <if test="isLock != null">
+                AND a.is_lock = #{isLock}
+            </if>
+            <if test="loginIp != null">
+                AND a.login_ip = #{loginIp}
+            </if>
+            <if test="creatorId != null">
+                AND a.creator_id = #{creatorId}
+            </if>
+            <if test="loginTime != null">
+                AND a.login_time = #{loginTime}
+            </if>
+        </where>
+
+
+        GROUP BY a.id
+    </select>
+
+    <!--更新登录次数时间信息-->
+    <update id="updateLoginResult">
+        UPDATE t_sys_user
+        <set>
+            login_count = (case #{bool} when true then ifnull(login_count,0) + 1 else login_count end),
+            login_time = (case #{bool} when true then now() else login_time end),
+            login_failure_count = (case #{bool} when false then ifnull(login_failure_count,0) + 1 else
+            login_failure_count end)
+        </set>
+        WHERE username = #{username}
+    </update>
+</mapper>

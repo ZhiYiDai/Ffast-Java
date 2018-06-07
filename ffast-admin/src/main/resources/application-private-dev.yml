@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  #servlet:
+    #contextPath: /api/
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: asd8510678
+    password: 523344582
+    url: jdbc:mysql://39.107.104.190:3306/ffast?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    druid:
+      initialSize: 1
+      maxActive: 10
+      minIdle: 1
+      maxWait: 60000
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    enabled: true
+    host: 39.107.104.190
+    port: 6379
+    password: 523344582
+    #过期时间（秒）
+    expirationSecond: 1800
+    #序列号方式 默认0   0:"FastJSON",1:"JackJson",2:"Msgpack"
+    serializerType: 2
+
+
+#日志配置
+logging:
+  config: classpath:dev/logback.xml
+
+auth:
+  pwdDefault: '123456'
+  #是否开启验证码
+  captchaEnable: true
+  #0使用jwt 1使用redis
+  type: 1
+  #过期时间（秒）
+  expirationSecond: 86400
+  jwt:
+    secret: '75SASD6fad5as6d5sa#ddd42ddd$fdd$d@dd'
+
+
+#上传配置
+upload:
+ filesBasePath: '/data/wwwroot/default/files/'
+ uploadUrl: 'http://39.107.104.190/files/'
+
+

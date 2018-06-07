@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.RoleResMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.RoleRes">
+        <id column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="res_id" property="resId"/>
+    </resultMap>
+    <select id="listByRoleId" resultType="cn.ffast.web.entity.sys.Res">
+        select a.id,a.name,a.url,a.parent_id,a.icon,a.res_type,a.identity
+        from t_sys_res a
+        LEFT JOIN t_sys_role_res b ON b.res_id=a.id
+        <where>
+            <if test="resType !=null">
+                a.res_type=#{resType}
+            </if>
+            <if test="roleIds !=null">
+                and b.role_id in(${roleIds})
+            </if>
+        </where>
+        GROUP BY a.id
+        ORDER BY a.weight
+    </select>
+
+
+</mapper>

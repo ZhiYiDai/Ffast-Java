@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.LogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.Log">
+        <result column="id" property="id"/> <!-- 主键 -->
+        <result column="content" property="content"/> <!-- 日志内容 -->
+        <result column="operation" property="operation"/> <!-- 用户操作 -->
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_modify_time" property="lastModifyTime"/>
+        <result column="last_modifier_id" property="lastModifierId"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        a.content, a.operation, a.create_time AS createTime, a.creator_id AS creatorId
+    </sql>
+
+    <select id="listByPage" resultType="cn.ffast.web.entity.sys.Log">
+        select b.name AS creatorName,
+        <include refid="Base_Column_List"/>
+        from t_sys_log a left join t_sys_user b on b.id=a.creator_id
+        <where>
+            <if test="id != null">
+                AND a.id = #{id}  <!-- 主键 -->
+            </if>
+            <if test="creatorId != null">
+                AND a.creator_id = #{creatorId}  <!-- 用户ID -->
+            </if>
+            <if test="createTime != null and createTime != ''">
+                AND cast(a.create_time as date) = #{createTime} <!-- 创建时间 -->
+            </if>
+            <if test="content != null and content != ''">
+                AND a.content like '%${content}%'  <!-- 日志内容 -->
+            </if>
+            <if test="operation != null and operation != ''">
+                AND a.operation = #{operation}  <!-- 用户操作 -->
+            </if>
+            <if test="creatorName != null and creatorName != ''">
+                AND b.name like '%${creatorName}%'  <!-- 创建人 -->
+            </if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <!--增改查范本-->
+    <!--
+    <select id="select" resultType="SysLog">
+        SELECT  <include refid="Base_Column_List" />
+        FROM t_sys_log
+        <include refid="Find_List_Where" />
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="SysLog">
+        INSERT INTO t_sys_log ()
+        VALUES()
+    </insert>
+    <update id="update" parameterType="SysLog">
+          UPDATE t_sys_log
+          <set>
+        </set>
+        WHERE id = #{id}
+     </update>
+    -->
+
+</mapper>

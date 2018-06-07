@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.UserRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.UserRole">
+        <id column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+
+    <select id="listByUserId" resultType="cn.ffast.web.entity.sys.Role">
+        SELECT b.id,b.name,b.role,b.description,b.main
+        FROM t_sys_user_role a
+        LEFT JOIN t_sys_role b on a.role_id=b.id
+        WHERE a.user_id=#{userId}
+        <if test="roleId != null">
+            AND a.role_id=#(roleId)
+        </if>
+
+    </select>
+
+</mapper>

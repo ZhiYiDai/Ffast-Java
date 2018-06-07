@@ -1,0 +1,87 @@
+#set($url="/${cfg.resPrefix}#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityPath}/")
+<style rel="stylesheet/scss" lang="scss" scoped>
+</style>
+
+<template>
+    <CrudView :tableOptions="tableOptions" ></CrudView>
+</template>
+
+<script>
+    /**
+     * 弹出式表单参数
+     */
+    const tableEditOptions = {
+        width: 800,
+        labelWidth: 100,
+        dynamic: [
+            [
+                {name: 'id', hidden: true},
+#set($list=${table.fields})
+#foreach($field in $list)
+#if(${field.propertyName}!='id'&&${field.propertyName}!='createTime'&&${field.propertyName}!='creatorId'&&${field.propertyName}!='lastModifyTime'&&${field.propertyName}!='lastModifierId'&&${field.propertyName}!='note'&&${field.propertyName}!='array')
+                {name: '${field.propertyName}', type: 'text', span: 4, label: '${field.comment}'},
+#end
+#end
+            ]
+        ]
+    };
+    /**
+     * 树参数
+     */
+    const treeOptions = {
+        title:'$!{table.comment}',
+        dataUrl: '${url}list',
+        createUrl: '${url}create',
+        deleteUrl: '${url}delete',
+        updateUrl: '${url}update'
+    };
+    /**
+     * 表格参数
+     */
+    const tableOptions = {
+        title:'$!{table.comment}',
+        pageSize: 20,
+        permsPrefix:'${cfg.resPrefix}',
+        dataUrl: '${url}list',
+        createUrl: '${url}create',
+        deleteUrl: '${url}delete',
+        updateUrl: '${url}update',
+        editOptions:tableEditOptions,
+        selection: [],
+        param: {},
+        columns: [
+            {type: 'selection', width: 60, align: 'center'},
+#set($list=${table.fields})
+#foreach($field in $list)
+#if(${field.propertyName}!='id'&&${field.propertyName}!='createTime'&&${field.propertyName}!='creatorId'&&${field.propertyName}!='lastModifyTime'&&${field.propertyName}!='lastModifierId'&&${field.propertyName}!='note'&&${field.propertyName}!='weight')
+			{key: '${field.propertyName}', title: '${field.comment}'},
+#end
+#end
+
+
+        ],
+        findDynamic: [
+            [
+#set($list=${table.fields})
+#foreach($field in $list)
+#if(${field.propertyName}!='id'&&${field.propertyName}!='createTime'&&${field.propertyName}!='creatorId'&&${field.propertyName}!='lastModifyTime'&&${field.propertyName}!='lastModifierId'&&${field.propertyName}!='note'&&${field.propertyName}!='weight')
+             {name: '${field.propertyName}', label: '${field.comment}', span: 6 ,type: 'text'},
+#end
+#end
+            ]
+        ]
+    };
+    import CrudView from 'components/views/crudView';
+    export default {
+        data () {
+            return {
+                tableOptions,
+                treeOptions
+            }
+        },
+        computed: {},
+        methods: {},
+        mounted () {},
+        components: {CrudView}
+    };
+</script>

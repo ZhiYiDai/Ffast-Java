@@ -1,0 +1,15 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+ 
+/**
+ * @description: $!{table.comment}服务类
+ * @copyright: ${copyright} (c)${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+public interface ${table.serviceName} extends ${superServiceClass}<${entity},Long> {
+	
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.AttachMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.Attach">
+        <result column="id" property="id"/> <!-- id -->
+        <result column="name" property="name"/> <!-- 附件名 -->
+        <result column="note" property="note"/> <!-- 备注 -->
+        <result column="creator_id" property="creatorId"/> <!-- 创建人 -->
+        <result column="create_time" property="createTime"/> <!-- 创建时间 -->
+        <result column="last_modifier_id" property="lastModifierId"/> <!-- 最后修改人 -->
+        <result column="last_modify_time" property="lastModifyTime"/> <!-- 最后修改时间 -->
+        <result column="path" property="path"/> <!-- 路径 -->
+        <result column="size" property="size"/> <!-- 文件大小 -->
+        <result column="extention" property="extention"/> <!-- 文件后缀 -->
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        a.path, a.size, a.extention,a.name,a.note,a.create_time
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Find_List_Where">
+        <where>
+            <if test="m.id != null">
+                AND id = #{m.id}  <!-- id -->
+            </if>
+            <if test="m.name != null and m.name != ''">
+                AND name = #{m.name}  <!-- 附件名 -->
+            </if>
+            <if test="m.note != null and m.note != ''">
+                AND note = #{m.note}  <!-- 备注 -->
+            </if>
+            <if test="m.creatorId != null">
+                AND creator_id = #{m.creatorId}  <!-- 创建人 -->
+            </if>
+            <if test="m.createTime != null and m.createTime != ''">
+                AND create_time = #{m.createTime}  <!-- 创建时间 -->
+            </if>
+            <if test="m.lastModifierId != null">
+                AND last_modifier_id = #{m.lastModifierId}  <!-- 最后修改人 -->
+            </if>
+            <if test="m.lastModifyTime != null and m.lastModifyTime != ''">
+                AND last_modify_time = #{m.lastModifyTime}  <!-- 最后修改时间 -->
+            </if>
+            <if test="m.path != null and m.path != ''">
+                AND path = #{m.path}  <!-- 路径 -->
+            </if>
+            <if test="m.size != null">
+                AND size = #{m.size}  <!-- 文件大小 -->
+            </if>
+            <if test="m.extention != null and m.extention != ''">
+                AND extention = #{m.extention}  <!-- 文件后缀 -->
+            </if>
+        </where>
+        ORDER BY id ASC
+    </sql>
+
+    <select id="listByPage" resultType="cn.ffast.web.entity.sys.Attach">
+        select b.name AS creatorName,
+        <include refid="Base_Column_List"/>
+        from t_sys_attach a left join t_sys_user b on b.id=a.creator_id
+        <where>
+            <if test="id != null">
+                AND a.id = #{id}  <!-- id -->
+            </if>
+            <if test="name != null and name != ''">
+                AND a.name = #{name}  <!-- 附件名 -->
+            </if>
+            <if test="note != null and note != ''">
+                AND a.note = #{note}  <!-- 备注 -->
+            </if>
+            <if test="creatorId != null">
+                AND a.creator_id = #{creatorId}  <!-- 创建人 -->
+            </if>
+            <if test="createTime != null and createTime != ''">
+                AND cast(a.create_time as date) = #{createTime}  <!-- 创建时间 -->
+            </if>
+            <if test="lastModifierId != null">
+                AND a.last_modifier_id = #{lastModifierId}  <!-- 最后修改人 -->
+            </if>
+            <if test="lastModifyTime != null and lastModifyTime != ''">
+                AND a.last_modify_time = #{lastModifyTime}  <!-- 最后修改时间 -->
+            </if>
+            <if test="path != null and path != ''">
+                AND a.path = #{path}  <!-- 路径 -->
+            </if>
+            <if test="size != null">
+                AND a.size = #{size}  <!-- 文件大小 -->
+            </if>
+            <if test="extention != null and extention != ''">
+                AND a.extention = #{extention}  <!-- 文件后缀 -->
+            </if>
+            <if test="creatorName != null and creatorName != ''">
+                AND b.name like '%${creatorName}%'  <!-- 创建人 -->
+            </if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+
+    <!--增改查范本-->
+    <!--
+    <select id="select" resultType="SysAttach">
+        SELECT  <include refid="Base_Column_List" />
+        FROM t_sys_attach
+        <include refid="Find_List_Where" />
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="SysAttach">
+        INSERT INTO t_sys_attach ()
+        VALUES()
+    </insert>
+    <update id="update" parameterType="SysAttach">
+          UPDATE t_sys_attach
+          <set>
+        </set>
+        WHERE id = #{id}
+     </update>
+    -->
+
+    <update id="updateCount">
+        UPDATE t_sys_attach
+        set count=(CASE WHEN (count+${addValue})&lt;0 THEN 0 ELSE count+${addValue} END)
+        WHERE id in(${ids})
+    </update>
+
+
+</mapper>

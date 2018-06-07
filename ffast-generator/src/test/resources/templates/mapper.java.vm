@@ -1,0 +1,15 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+
+/**
+ * @description: $!{table.comment}Mapper接口
+ * @copyright: ${copyright} (c)${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}

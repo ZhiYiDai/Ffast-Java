@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.sys.DictMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ffast.web.entity.sys.Dict">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="note" property="note"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_modify_time" property="lastModifyTime"/>
+        <result column="last_modifier_id" property="lastModifierId"/>
+        <result column="dict_type_id" property="dictTypeId"/>
+        <result column="code" property="code"/>
+        <result column="is_sys" property="isSys"/>
+        <result column="weight" property="weight"/>
+    </resultMap>
+    <select id="listDict" resultType="cn.ffast.web.entity.sys.Dict">
+        select a.id,a.name
+        FROM t_sys_dict a
+        LEFT JOIN t_sys_dict_type b ON a.dict_type_id=b.id
+        <where>
+            <if test="identity != null and identity != ''">
+                AND b.identity =#{identity}   <!-- 标识符 -->
+            </if>
+            <if test="name != null ">
+                AND b.name = #{name}  <!-- 分类名 -->
+            </if>
+        </where>
+        ORDER BY a.weight
+    </select>
+
+</mapper>
