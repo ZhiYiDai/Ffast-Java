@@ -9,3 +9,6 @@
 /ffast-admin/*.iml
 /ffast-parent/*.iml
 /ffast.iml
+/ffast-admin/ffast-admin.iml
+/ffast-core/ffast-core.iml
+/ffast-generator/ffast-generator.iml
