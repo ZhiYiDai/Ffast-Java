@@ -7,7 +7,7 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
     2.增删改查CrudController CrudService 支持提供灵活的 删除前,删除后,查询前,查询后,更新前,更新后,增加前,增加后方法提供给子类扩展。
     3.可以在application.yml进行项目参数配置
     4.redis序列化方式可以配置化，支持msgpack  jackson fastjson ，并可以使用RedisUtils工具类进行不同的序列方式缓存
-    5.Session 存放方式可配置化，支持存放Redis jwt
+    5.Session 存放方式可配置化，支持Redis Jwt 两种方式
     6.封装了权限验证注解，登录拦截注解、日志注解、增删改查配置注解、简单方便。
 
 ##前端解决方案Ffast-FE 
@@ -22,6 +22,7 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
     ├── ffast-parent -- parent
 
 ###已实现的模块
+``` bash
     1.用户管理
     2.角色管理
     3.字典管理
@@ -29,10 +30,13 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
     5.系统日志
     6.权限菜单管理
     7.待办事项
+```   
 ###开发中的模块
+``` bash
     1.代码生成器
-
-##一个简单增删改查Controller
+``` 
+##增删改查Controller
+``` bash
     @Controller
     @RequestMapping("/api/sys/res")
     // 增删改查配置注解
@@ -66,9 +70,9 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
         更新/api/sys/res/create
         具体实现可以查看BaseCrudController源代码
     */
-    
-###一个简单增删改查Service
-
+```   
+###增删改查Service
+``` bash
     @Service
     public class DictServiceImpl extends CrudServiceImpl<DictMapper, Dict, Long> implements IDictService {
     
@@ -161,5 +165,5 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
             return null;
         }
     }
-    
+```   
 > 更多详细请阅读代码,说明文档完善中...
