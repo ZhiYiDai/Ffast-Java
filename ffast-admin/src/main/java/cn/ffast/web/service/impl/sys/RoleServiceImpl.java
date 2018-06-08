@@ -64,4 +64,13 @@ public class RoleServiceImpl extends CrudServiceImpl<RoleMapper, Role, Long> imp
         }
         return null;
     }
+
+
+    @Override
+    protected ServiceResult updateBefore(Role m, Role oldM) {
+        if (Integer.valueOf(1).equals(oldM.getIsSys())) {
+            return new ServiceResult(false).setMessage("不能修改系统角色");
+        }
+        return null;
+    }
 }
