@@ -2,6 +2,7 @@
 Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发解决方案
 
 ##简 介
+``` bash
     Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发解决方案，并具备以下特点
     1.在Mybatis Plus基础上封装了基础增删改Service Controller
     2.增删改查CrudController CrudService 支持提供灵活的 删除前,删除后,查询前,查询后,更新前,更新后,增加前,增加后方法提供给子类扩展。
@@ -9,18 +10,20 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
     4.redis序列化方式可以配置化，支持msgpack  jackson fastjson ，并可以使用RedisUtils工具类进行不同的序列方式缓存
     5.Session 存放方式可配置化，支持Redis Jwt 两种方式
     6.封装了权限验证注解，登录拦截注解、日志注解、增删改查配置注解、简单方便。
-
+```  
 ##前端解决方案Ffast-FE 
+``` bash
     Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案
     详细地址 https://github.com/ZhiYiDai/Ffast-FE 
-
+```  
 ##项目结构
+``` bash
     Ffast
     ├── ffast-admin -- 后台管理系统
     ├── ffast-core -- 项目核心代码与工具类
     ├── ffast-generator -- 代码生成器
     ├── ffast-parent -- parent
-
+```  
 ###已实现的模块
 ``` bash
     1.用户管理
