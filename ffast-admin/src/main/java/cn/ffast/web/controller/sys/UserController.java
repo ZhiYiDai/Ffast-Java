@@ -122,9 +122,9 @@ public class UserController extends BaseCrudController<User, IUserService, Long>
     @RequestMapping(value = "/respwd", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult respwd(String pwd, String newpwd, String newpwd2) {
-//        if (operatorUtils.getLoginUserId().intValue() == 1) {
-//            return new ServiceResult(false).setMessage("不能修改超级管理员账户");
-//        }
+        if (operatorUtils.getLoginUserId().intValue() == 1) {
+            return new ServiceResult(false).setMessage("不能修改超级管理员账户");
+        }
         return service.respwd(operatorUtils.getLoginUserId(), pwd, newpwd, newpwd2);
     }
 

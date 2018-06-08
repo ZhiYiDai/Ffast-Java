@@ -64,9 +64,9 @@ public class RoleResController extends BaseCrudController<RoleRes, IRoleResServi
     @ResponseBody
     @RequestMapping(value = "/saveRes")
     public ServiceResult saveRes(String ids, Long roleId) {
-//        if (roleId.intValue() == 1) {
-//            return new ServiceResult(false).setMessage("不能修改超级管理员账户");
-//        }
+        if (roleId.intValue() == 1) {
+            return new ServiceResult(false).setMessage("不能修改超级管理员账户");
+        }
         return service.saveRes(ids, roleId);
     }
 

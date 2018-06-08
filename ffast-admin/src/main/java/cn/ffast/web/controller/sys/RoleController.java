@@ -2,11 +2,13 @@ package cn.ffast.web.controller.sys;
 
 
 import cn.ffast.core.annotations.Logined;
+import cn.ffast.core.vo.ServiceResult;
 import cn.ffast.web.entity.sys.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.annotation.Resource;
 
 import cn.ffast.web.service.sys.IRoleService;
@@ -24,7 +26,7 @@ import cn.ffast.core.support.BaseCrudController;
 @RequestMapping("/api/sys/role")
 @Logined
 
-public class RoleController extends BaseCrudController<Role,IRoleService,Long> {
+public class RoleController extends BaseCrudController<Role, IRoleService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(RoleController.class);
 
@@ -41,6 +43,12 @@ public class RoleController extends BaseCrudController<Role,IRoleService,Long> {
         return logger;
     }
 
-
+    @Override
+    protected ServiceResult updateBefore(Role m) {
+        if (Integer.valueOf(1).equals(m.getIsSys())) {
+            return new ServiceResult(false).setMessage("不能修改系统");
+        }
+        return null;
+    }
 
 }

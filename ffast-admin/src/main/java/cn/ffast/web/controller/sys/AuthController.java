@@ -42,7 +42,7 @@ public class AuthController extends BaseController {
     @RequestMapping(value = "/login")
     @ResponseBody
     public ServiceResult login(String username, String password, String captcha) {
-        return authService.login(username, password, captcha, null, true);
+        return authService.login(username, password, captcha, true);
     }
 
 
@@ -83,7 +83,7 @@ public class AuthController extends BaseController {
     /**
      * 获得菜单权限
      *
-     * @param roleId 指定登录角色id的菜单权限（为空则默认角色）
+     * @param roleName 指定登录角色名的菜单权限（为空则默认角色）
      * @return
      */
     @RequestMapping(value = "/getMenuPerms")

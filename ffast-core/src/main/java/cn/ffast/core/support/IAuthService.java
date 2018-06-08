@@ -11,11 +11,10 @@ public interface IAuthService {
      * @param username  账户
      * @param password  密码
      * @param captcha   验证码
-     * @param roleId 指定登录角色ID
      * @param getMenuPerms 同时获得菜单权限
      * @return
      */
-    ServiceResult login(String username, String password, String captcha, Long roleId, boolean getMenuPerms);
+    ServiceResult login(String username, String password, String captcha, boolean getMenuPerms);
 
     /**
      * 退出登录

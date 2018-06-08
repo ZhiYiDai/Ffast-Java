@@ -83,7 +83,7 @@ public class AttachController extends BaseCrudController<Attach, IAttachService,
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     @ResponseBody
     public Object uploadImg(MultipartFile file, HttpServletRequest request) {
-        return service.uploadImg("hubi", file);
+        return service.uploadImg("ffast", file);
     }
 
     /**

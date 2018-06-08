@@ -43,8 +43,9 @@ public class AuthServiceImpl implements IAuthService {
 
 
     @Override
-    public ServiceResult login(String username, String password, String captcha, Long roleId, boolean getMenuPerms) {
+    public ServiceResult login(String username, String password, String captcha, boolean getMenuPerms) {
         ServiceResult result = new ServiceResult(false);
+        logger.debug("login username:%s password:%s captcha%s", username, password, captcha);
         if (captchaEnable) {
             if (StringUtils.isEmpty(captcha)) {
                 result.setMessage("验证码不为空！");
@@ -71,13 +72,13 @@ public class AuthServiceImpl implements IAuthService {
             result.setMessage("该用户已经被锁定！无法登陆！");
             return result;
         }
-        joinData(user, result, getMenuPerms, roleId);
+        joinData(user, result, getMenuPerms);
         logger.debug(user.getUsername() + "【登录】");
         result.setSuccess(true);
         return result;
     }
 
-    private void joinData(User user, ServiceResult result, Boolean getMenuPerms, Long roleId) {
+    private void joinData(User user, ServiceResult result, Boolean getMenuPerms) {
         userService.updateLoginResult(user.getUsername(), true);
         Operator curLoginUser = new Operator();
         curLoginUser.setUserName(user.getUsername());
@@ -88,7 +89,7 @@ public class AuthServiceImpl implements IAuthService {
         /**
          * 获得角色和角色权限
          */
-        List<Role> roles = userRoleService.listByUserId(user.getId(), roleId);
+        List<Role> roles = userRoleService.listByUserId(user.getId(), null);
         if (CollectionUtils.isNotEmpty(roles)) {
             int roleSize = roles.size();
             Set<Long> roleIds = new HashSet<>(roleSize);

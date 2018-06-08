@@ -64,20 +64,21 @@ public class CaptchaService {
 
     public boolean valid(HttpServletRequest request, String code) {
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
-            Cookie cookie = cookies[i];
-            if (cookie.getName().equals("captchaId")) {
-                String key = CAPTCHA_KEY + cookie.getValue();
-                String captcha = redisCacheUtils.getCacheObject(key, String.class);
-                redisCacheUtils.delete(CAPTCHA_KEY + cookie.getValue());
-                if (StringUtils.isNotEmpty(captcha) && StringUtils.isNotEmpty(code) &&
-                        code.toLowerCase().equals(captcha.toLowerCase())) {
-                    return true;
-                }
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                Cookie cookie = cookies[i];
+                if (cookie.getName().equals("captchaId")) {
+                    String key = CAPTCHA_KEY + cookie.getValue();
+                    String captcha = redisCacheUtils.getCacheObject(key, String.class);
+                    redisCacheUtils.delete(CAPTCHA_KEY + cookie.getValue());
+                    if (StringUtils.isNotEmpty(captcha) && StringUtils.isNotEmpty(code) &&
+                            code.toLowerCase().equals(captcha.toLowerCase())) {
+                        return true;
+                    }
 
+                }
             }
         }
-
         return false;
     }
 }
