@@ -32,10 +32,6 @@ public class BaseService<M extends BaseMapper<T>, T extends BaseEntity> extends 
     }
 
 
-    protected Object getAttribute(String var1) {
-        return HttpServletUtils.getAttribute(var1);
-    }
-
     /**
      * 获取所有请求参数
      *
@@ -92,7 +88,7 @@ public class BaseService<M extends BaseMapper<T>, T extends BaseEntity> extends 
      * @return
      */
     protected OperatorBase getLoginUser() {
-        Object obj = getAttribute("loginUser");
+        Object obj = HttpServletUtils.getRequestAttribute("loginUser");
         if (obj != null) {
             return (OperatorBase) (obj);
         }

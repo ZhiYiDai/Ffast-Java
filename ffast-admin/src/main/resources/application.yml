@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: private-dev
+    active: dev
   flyway:
     enabled: true
     baselineOnMigrate: true

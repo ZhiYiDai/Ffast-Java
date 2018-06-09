@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/api/sys/dict")
 @Permission(value = "dict")
-@CrudConfig(retrievePermission = "")
 public class DictController extends BaseCrudController<Dict,IDictService,Long> {
 
     private static Logger logger = LoggerFactory.getLogger(DictController.class);

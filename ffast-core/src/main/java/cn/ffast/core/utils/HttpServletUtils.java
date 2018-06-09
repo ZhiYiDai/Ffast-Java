@@ -28,8 +28,12 @@ public class HttpServletUtils {
         return getRequest().getSession();
     }
 
-    public static Object getAttribute(String var1) {
+    public static Object getSessionAttribute(String var1) {
         return getHttpSession().getAttribute(var1);
+    }
+
+    public static Object getRequestAttribute(String var1) {
+        return getRequest().getAttribute(var1);
     }
 
 

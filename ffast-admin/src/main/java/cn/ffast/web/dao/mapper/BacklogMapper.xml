@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ffast.web.dao.work.BacklogMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.ffast.web.entity.work.Backlog">
+	<result column="id" property="id" /> <!-- id -->
+	<result column="name" property="name" /> <!-- 名称 -->
+	<result column="creator_id" property="creatorId" /> <!-- 创建人 -->
+	<result column="create_time" property="createTime" /> <!-- 创建时间 -->
+	<result column="last_modifier_id" property="lastModifierId" /> <!-- 最后修改人 -->
+	<result column="last_modify_time" property="lastModifyTime" /> <!-- 最后修改时间 -->
+	<result column="content" property="content" /> <!-- 内容 -->
+	<result column="pictures" property="pictures" /> <!-- 图片 -->
+	<result column="start_time" property="startTime" /> <!-- 待办时间 -->
+	<result column="finish_time" property="finishTime" /> <!-- 待办完成时间 -->
+	<result column="from_module" property="fromModule" /> <!-- 来源模块 -->
+	<result column="from_id" property="fromId" /> <!-- 来源id -->
+	<result column="priority" property="priority" /> <!-- 优先级（0=一般1=重要） -->
+	<result column="user_ids" property="userIds" /> <!-- 待办用户 -->
+	<result column="status" property="status" /> <!-- 状态(0=未完成1=已完成) -->
+	<result column="remind_days" property="remindDays" /> <!-- 提前多少天提醒 -->
+	<result column="备注" property="备注" /> <!-- 备注 -->
+	<result column="inform_type" property="informType" /> <!-- 通知渠道 -->
+	</resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        content, pictures, start_time AS startTime, finish_time AS finishTime, from_module AS fromModule, from_id AS fromId, priority, user_ids AS userIds, status, remind_days AS remindDays, 备注, inform_type AS informType
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Find_List_Where">
+		<where>
+		<if test="m.id != null">
+			AND id = #{m.id}  <!-- id -->
+		</if>
+		<if test="m.name != null and m.name != ''">
+			AND name = #{m.name}  <!-- 名称 -->
+		</if>
+		<if test="m.creatorId != null">
+			AND creator_id = #{m.creatorId}  <!-- 创建人 -->
+		</if>
+		<if test="m.createTime != null and m.createTime != ''">
+			AND create_time = #{m.createTime}  <!-- 创建时间 -->
+		</if>
+		<if test="m.lastModifierId != null">
+			AND last_modifier_id = #{m.lastModifierId}  <!-- 最后修改人 -->
+		</if>
+		<if test="m.lastModifyTime != null and m.lastModifyTime != ''">
+			AND last_modify_time = #{m.lastModifyTime}  <!-- 最后修改时间 -->
+		</if>
+		<if test="m.content != null and m.content != ''">
+			AND content = #{m.content}  <!-- 内容 -->
+		</if>
+		<if test="m.pictures != null and m.pictures != ''">
+			AND pictures = #{m.pictures}  <!-- 图片 -->
+		</if>
+		<if test="m.startTime != null and m.startTime != ''">
+			AND start_time = #{m.startTime}  <!-- 待办时间 -->
+		</if>
+		<if test="m.finishTime != null and m.finishTime != ''">
+			AND finish_time = #{m.finishTime}  <!-- 待办完成时间 -->
+		</if>
+		<if test="m.fromModule != null">
+			AND from_module = #{m.fromModule}  <!-- 来源模块 -->
+		</if>
+		<if test="m.fromId != null">
+			AND from_id = #{m.fromId}  <!-- 来源id -->
+		</if>
+		<if test="m.priority != null">
+			AND priority = #{m.priority}  <!-- 优先级（0=一般1=重要） -->
+		</if>
+		<if test="m.userIds != null and m.userIds != ''">
+			AND user_ids = #{m.userIds}  <!-- 待办用户 -->
+		</if>
+		<if test="m.status != null">
+			AND status = #{m.status}  <!-- 状态(0=未完成1=已完成) -->
+		</if>
+		<if test="m.remindDays != null">
+			AND remind_days = #{m.remindDays}  <!-- 提前多少天提醒 -->
+		</if>
+		<if test="m.备注 != null and m.备注 != ''">
+			AND 备注 = #{m.备注}  <!-- 备注 -->
+		</if>
+		<if test="m.informType != null and m.informType != ''">
+			AND inform_type = #{m.informType}  <!-- 通知渠道 -->
+		</if>
+    	</where>
+    	ORDER BY id ASC
+    </sql>
+
+    <!--增改查范本-->
+	<!--
+	<select id="select" resultType="Backlog">
+    	SELECT  <include refid="Base_Column_List" />
+    	FROM t_work_backlog
+    	<include refid="Find_List_Where" />
+	</select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Backlog">
+        INSERT INTO t_work_backlog ()
+        VALUES()
+    </insert>
+    <update id="update" parameterType="Backlog">
+      	UPDATE t_work_backlog
+      	<set>
+        </set>
+        WHERE id = #{id}
+     </update>
+	-->
+
+</mapper>

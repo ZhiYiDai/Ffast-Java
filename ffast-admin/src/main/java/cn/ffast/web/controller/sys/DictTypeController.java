@@ -24,7 +24,6 @@ import cn.ffast.core.support.BaseCrudController;
 @RequestMapping("/api/sys/dictType")
 @Logined
 @Permission(value = "dict")
-@CrudConfig(retrievePermission = "")
 public class DictTypeController extends BaseCrudController<DictType,IDictTypeService,Long> {
 
     private static Logger logger = LoggerFactory.getLogger(DictTypeController.class);

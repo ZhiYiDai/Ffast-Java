@@ -24,7 +24,7 @@ import cn.ffast.core.support.BaseCrudController;
  */
 @Controller
 @RequestMapping("/api/sys/res")
-@CrudConfig(updateAllColumn = true,retrievePermission = "")
+@CrudConfig(updateAllColumn = true, retrievePermission = "")
 @Permission(value = "res")
 @Logined
 public class ResController extends BaseCrudController<Res, IResService, Long> {
@@ -44,6 +44,21 @@ public class ResController extends BaseCrudController<Res, IResService, Long> {
         return logger;
     }
 
+
+    @Override
+    protected ServiceResult createBefore(Res m) {
+        return new ServiceResult(false).setMessage("暂时关闭该功能！");
+    }
+
+    @Override
+    protected ServiceResult deleteBefore(String ids) {
+        return new ServiceResult(false).setMessage("暂时关闭该功能！");
+    }
+
+    @Override
+    protected ServiceResult updateBefore(Res m) {
+        return new ServiceResult(false).setMessage("暂时关闭该功能！");
+    }
 
     @Override
     protected void createAfter(Res m, ServiceResult result) {

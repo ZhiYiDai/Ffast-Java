@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/sys/roleRes")
 @Logined
 @Permission(value = "roleRes")
-@CrudConfig(updatePermission = "uupp", deletePermission = "ddll")
 public class RoleResController extends BaseCrudController<RoleRes, IRoleResService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(RoleResController.class);
