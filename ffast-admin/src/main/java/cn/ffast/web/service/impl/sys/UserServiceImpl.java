@@ -4,6 +4,7 @@ import cn.ffast.core.annotations.Log;
 import cn.ffast.core.support.CrudServiceImpl;
 import cn.ffast.core.utils.Md5Utils;
 import cn.ffast.web.dao.sys.UserMapper;
+import cn.ffast.web.entity.sys.Role;
 import cn.ffast.web.entity.sys.User;
 import cn.ffast.web.service.sys.IUserService;
 import cn.ffast.core.utils.PasswordUtil;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description: 系统_用户服务实现类
@@ -157,5 +159,21 @@ public class UserServiceImpl extends CrudServiceImpl<UserMapper, User, Long> imp
     @Override
     public void updateLoginResult(String username, Boolean bool) {
         userMapper.updateLoginResult(username, bool);
+    }
+
+
+    @Override
+    protected ServiceResult deleteBefore(String ids, EntityWrapper<User> ew) {
+//        EntityWrapper selectEw = new EntityWrapper<User>();
+//        selectEw.in("id", ids);
+//        List<User> users = baseMapper.selectList(selectEw);
+//        for (User user : users) {
+//            if (Integer.valueOf(1).equals(user.getIsSys())) {
+//                return new ServiceResult(false).setMessage("不能修改系统账号");
+//            }
+//        }
+        return null;
+
+
     }
 }

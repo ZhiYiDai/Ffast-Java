@@ -122,10 +122,21 @@ public class UserController extends BaseCrudController<User, IUserService, Long>
     @RequestMapping(value = "/respwd", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult respwd(String pwd, String newpwd, String newpwd2) {
+        // Demo限制（可以删除）：不允许修改超级管理员账户
         if (operatorUtils.getLoginUserId().intValue() == 1) {
             return new ServiceResult(false).setMessage("不能修改超级管理员账户");
         }
         return service.respwd(operatorUtils.getLoginUserId(), pwd, newpwd, newpwd2);
+    }
+
+
+    @Override
+    protected ServiceResult updateBefore(User m) {
+        // Demo限制（可以删除）：修改用户前判断，不允许修改admin账户
+        if (m.getId() == 1) {
+            return new ServiceResult(false).setMessage("不能修改admin");
+        }
+        return null;
     }
 
 

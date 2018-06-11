@@ -114,13 +114,13 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
         if (idArray == null || idArray.length == 0) {
             result.setMessage("请选择要删除的数据行");
         } else {
-            ServiceResult beforeResult = deleteBefore(ids);
+            EntityWrapper ew = new EntityWrapper<T>();
+            ServiceResult beforeResult = deleteBefore(ids, ew);
             if (beforeResult != null) {
                 return beforeResult;
             }
 
             try {
-                EntityWrapper ew = new EntityWrapper<T>();
                 ew.in("id", ids);
                 if (delete(ew)) {
                     ServiceResult afterResult = deleteAfter(ids);
@@ -243,7 +243,7 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
      * @param ids
      * @return
      */
-    protected ServiceResult deleteBefore(String ids) {
+    protected ServiceResult deleteBefore(String ids, EntityWrapper<T> ew) {
         return null;
     }
 

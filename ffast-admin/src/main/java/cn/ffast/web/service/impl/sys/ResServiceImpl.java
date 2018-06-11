@@ -65,10 +65,10 @@ public class ResServiceImpl extends CrudServiceImpl<ResMapper, Res, Long> implem
     }
 
     @Override
-    protected ServiceResult deleteBefore(String ids) {
-        EntityWrapper ew = new EntityWrapper<RoleRes>();
-        ew.in("res_id", ids);
-        roleResMapper.delete(ew);
+    protected ServiceResult deleteBefore(String ids, EntityWrapper<Res> ew) {
+        EntityWrapper selectEw = new EntityWrapper<RoleRes>();
+        selectEw.in("res_id", ids);
+        roleResMapper.delete(selectEw);
         return null;
     }
 

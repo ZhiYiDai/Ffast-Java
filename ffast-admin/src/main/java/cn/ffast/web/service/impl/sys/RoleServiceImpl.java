@@ -53,10 +53,10 @@ public class RoleServiceImpl extends CrudServiceImpl<RoleMapper, Role, Long> imp
     }
 
     @Override
-    protected ServiceResult deleteBefore(String ids) {
-        EntityWrapper ew = new EntityWrapper<Role>();
-        ew.in("id", ids);
-        List<Role> roles = baseMapper.selectList(ew);
+    protected ServiceResult deleteBefore(String ids, EntityWrapper<Role> ew) {
+        EntityWrapper selectEw = new EntityWrapper<Role>();
+        selectEw.in("id", ids);
+        List<Role> roles = baseMapper.selectList(selectEw);
         for (Role role : roles) {
             if (new Integer(1).equals(role.getIsSys())) {
                 return new ServiceResult(false).setMessage("无法删除系统角色:" + role.getName());

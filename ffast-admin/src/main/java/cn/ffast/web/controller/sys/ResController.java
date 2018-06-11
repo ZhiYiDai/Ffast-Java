@@ -47,16 +47,19 @@ public class ResController extends BaseCrudController<Res, IResService, Long> {
 
     @Override
     protected ServiceResult createBefore(Res m) {
+        // Demo限制 可以删除
         return new ServiceResult(false).setMessage("暂时关闭该功能！");
     }
 
     @Override
     protected ServiceResult deleteBefore(String ids) {
+        // Demo限制 可以删除
         return new ServiceResult(false).setMessage("暂时关闭该功能！");
     }
 
     @Override
     protected ServiceResult updateBefore(Res m) {
+        // Demo限制 可以删除
         return new ServiceResult(false).setMessage("暂时关闭该功能！");
     }
 
