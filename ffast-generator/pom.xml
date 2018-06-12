@@ -20,6 +20,13 @@
             <artifactId>ffast-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- 模板引擎 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
     </dependencies>
 
 </project>
