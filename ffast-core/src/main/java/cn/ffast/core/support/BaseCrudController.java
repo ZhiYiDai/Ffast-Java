@@ -144,7 +144,8 @@ public abstract class BaseCrudController<T extends BaseEntity, S extends ICrudSe
         if (beforeResult != null) {
             return beforeResult;
         }
-        ServiceResult result = getService().update(m, isUpdateAllColumn());
+        CrudConfig crudConfig = getCrudConfig();
+        ServiceResult result = getService().update(m, isUpdateAllColumn(crudConfig), getUpdateIgnoreProperties(crudConfig));
         updateAfter(m, result);
         return result;
     }
@@ -283,8 +284,22 @@ public abstract class BaseCrudController<T extends BaseEntity, S extends ICrudSe
      *
      * @return
      */
-    private boolean isUpdateAllColumn() {
-        CrudConfig crudConfig = getCrudConfig();
+    private String[] getUpdateIgnoreProperties(CrudConfig crudConfig) {
+        String[] ignore = {"create_time", "creator_id"};
+        if (crudConfig != null) {
+            return ArrayUtils.addAll(ignore, crudConfig.updateIgnoreProperties());
+        } else {
+            return ignore;
+        }
+    }
+
+    /**
+     * 从注解配置获得是否更新所有字段
+     *
+     * @return
+     */
+    private boolean isUpdateAllColumn(CrudConfig crudConfig) {
+        crudConfig = getCrudConfig();
         if (crudConfig != null && crudConfig.updateAllColumn()) {
             return true;
         } else {

@@ -1,5 +1,6 @@
 package cn.ffast.web.service.impl.sys;
 
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.support.CrudServiceImpl;
 import cn.ffast.web.dao.sys.AttachMapper;
 import cn.ffast.web.entity.sys.Attach;
@@ -71,6 +72,7 @@ public class AttachServiceImpl extends CrudServiceImpl<AttachMapper, Attach, Lon
     }
 
     @Override
+    @Log("上传图片")
     public ServiceResult uploadImg(String resource, MultipartFile file) {
         ServiceResult result = new ServiceResult(false);
         String fileName = file.getOriginalFilename();

@@ -2,7 +2,8 @@ package cn.ffast.core.auth;
 
 import cn.ffast.core.redis.RedisCacheUtils;
 import cn.ffast.core.utils.Md5Utils;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;

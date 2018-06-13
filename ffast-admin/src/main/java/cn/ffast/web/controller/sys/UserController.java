@@ -1,6 +1,7 @@
 package cn.ffast.web.controller.sys;
 
 
+import cn.ffast.core.annotations.CrudConfig;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.auth.OperatorUtils;
@@ -39,6 +40,7 @@ import java.util.List;
 @RequestMapping("/api/sys/user")
 @Logined
 @Permission(value = "user")
+@CrudConfig(updateAllColumn = true, updateIgnoreProperties = {"pwd", "salt"})
 public class UserController extends BaseCrudController<User, IUserService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -79,22 +81,27 @@ public class UserController extends BaseCrudController<User, IUserService, Long>
      * @param result
      */
     private void updateRole(User m, ServiceResult result) {
-        if (!StringUtils.isEmpty(m.getRoleId()) && m.getId() != null) {
-            String[] idArray = FStringUtil.split(m.getRoleId(), ",");
-            Long creatorId = getLoginUserId();
-            List<UserRole> urList = new ArrayList<>();
-            for (int i = 0; i < idArray.length; i++) {
-                UserRole ur = new UserRole();
-                ur.setUserId(m.getId());
-                ur.setRoleId(new Long(idArray[i]));
-                ur.setCreatorId(creatorId);
-                urList.add(ur);
+        EntityWrapper ew = new EntityWrapper<User>();
+        ew.eq("user_id", m.getId());
+        if (!StringUtils.isEmpty(m.getRoleId())) {
+            if (m.getId() != null) {
+                String[] idArray = FStringUtil.split(m.getRoleId(), ",");
+                Long creatorId = getLoginUserId();
+                List<UserRole> urList = new ArrayList<>();
+                for (int i = 0; i < idArray.length; i++) {
+                    UserRole ur = new UserRole();
+                    ur.setUserId(m.getId());
+                    ur.setRoleId(new Long(idArray[i]));
+                    ur.setCreatorId(creatorId);
+                    urList.add(ur);
+                }
+                userRoleService.delete(ew);
+                userRoleService.insertBatch(urList);
             }
-            EntityWrapper ew = new EntityWrapper<User>();
-            ew.eq("user_id", m.getId());
+        } else {
             userRoleService.delete(ew);
-            userRoleService.insertBatch(urList);
         }
+
     }
 
     /**

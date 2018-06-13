@@ -1,5 +1,6 @@
 package cn.ffast.web.controller.sys;
 
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.vo.ServiceResult;
@@ -32,6 +33,7 @@ import java.io.*;
 @RequestMapping("/api/sys/attach")
 @Logined
 @Permission(value = "auth")
+@Log("附件")
 public class AttachController extends BaseCrudController<Attach, IAttachService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(AttachController.class);

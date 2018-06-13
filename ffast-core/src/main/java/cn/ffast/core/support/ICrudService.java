@@ -31,7 +31,7 @@ public interface ICrudService<T extends BaseEntity,ID> extends IService<T> {
      * @param updateAllColumn 是否更新所有字段
      * @return
      */
-    ServiceResult update(T m, boolean updateAllColumn);
+    ServiceResult update(T m, boolean updateAllColumn,String[] ignoreProperties);
     /**
      * @description: 批量删除
      * @createTime: 2017-9-5 10:00

@@ -55,6 +55,9 @@ public @interface CrudConfig {
      * 删除接口权限名
      */
     String deletePermission() default "delete";
-
+    /**
+     * 更新排除字段
+     */
+    String[] updateIgnoreProperties() default {};
 
 }

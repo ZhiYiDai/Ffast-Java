@@ -1,6 +1,8 @@
 package cn.ffast.web.controller.sys;
 
 
+import cn.ffast.core.annotations.CrudConfig;
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.vo.ServiceResult;
@@ -27,6 +29,7 @@ import cn.ffast.core.support.BaseCrudController;
 @RequestMapping("/api/sys/role")
 @Logined
 @Permission(value = "role")
+@Log("角色管理")
 public class RoleController extends BaseCrudController<Role, IRoleService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(RoleController.class);

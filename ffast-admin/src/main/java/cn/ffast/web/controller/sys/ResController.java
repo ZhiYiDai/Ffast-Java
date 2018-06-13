@@ -1,6 +1,7 @@
 package cn.ffast.web.controller.sys;
 
 import cn.ffast.core.annotations.CrudConfig;
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.vo.ServiceResult;
@@ -27,6 +28,7 @@ import cn.ffast.core.support.BaseCrudController;
 @CrudConfig(updateAllColumn = true, retrievePermission = "")
 @Permission(value = "res")
 @Logined
+@Log("菜单权限")
 public class ResController extends BaseCrudController<Res, IResService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(ResController.class);

@@ -1,6 +1,7 @@
 package cn.ffast.web.controller.sys;
 
 import cn.ffast.core.annotations.CrudConfig;
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.vo.ServiceResult;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/api/sys/dict")
 @Permission(value = "dict")
+@Log("字典")
 public class DictController extends BaseCrudController<Dict,IDictService,Long> {
 
     private static Logger logger = LoggerFactory.getLogger(DictController.class);

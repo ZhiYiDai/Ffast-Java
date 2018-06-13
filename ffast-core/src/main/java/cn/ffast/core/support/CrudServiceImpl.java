@@ -68,9 +68,11 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
     }
 
 
+
+
     @Override
     @Log("更新记录")
-    public ServiceResult update(T m, boolean updateAllColumn) {
+    public ServiceResult update(T m, boolean updateAllColumn, String[] ignoreProperties) {
         logger.debug("更新记录");
         ServiceResult result = new ServiceResult(false);
         if (m == null || m.getId() == null) {
@@ -87,8 +89,8 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
             // 是否更新所有字段
             if (updateAllColumn) {
                 // 将旧记录和修改的记录合并
-                BeanUtils.copyProperties(oldM, m);
-                status = updateAllColumnById(m);
+                BeanUtils.copyProperties(m, oldM, ignoreProperties);
+                status = updateAllColumnById(oldM);
             } else {
                 status = updateById(m);
             }

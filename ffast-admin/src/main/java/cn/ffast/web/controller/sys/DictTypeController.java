@@ -1,6 +1,7 @@
 package cn.ffast.web.controller.sys;
 
 import cn.ffast.core.annotations.CrudConfig;
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import cn.ffast.core.support.BaseCrudController;
 @RequestMapping("/api/sys/dictType")
 @Logined
 @Permission(value = "dict")
+@Log("字典分类")
 public class DictTypeController extends BaseCrudController<DictType,IDictTypeService,Long> {
 
     private static Logger logger = LoggerFactory.getLogger(DictTypeController.class);

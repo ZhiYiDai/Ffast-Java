@@ -1,6 +1,7 @@
 package cn.ffast.web.controller.sys;
 
-import cn.ffast.core.annotations.CrudConfig;
+
+import cn.ffast.core.annotations.Log;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.auth.OperatorUtils;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/sys/roleRes")
 @Logined
 @Permission(value = "roleRes")
+@Log("角色资源")
 public class RoleResController extends BaseCrudController<RoleRes, IRoleResService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(RoleResController.class);
