@@ -43,6 +43,11 @@ public class Dict extends BaseEntity<Dict> {
     private Integer weight;
 
 
+	/**
+	 * 备注
+	 */
+	private String note;
+
 	public Long getDictTypeId() {
 		return dictTypeId;
 	}
@@ -82,5 +87,13 @@ public class Dict extends BaseEntity<Dict> {
 
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 }

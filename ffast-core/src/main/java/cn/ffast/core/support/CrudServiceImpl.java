@@ -4,6 +4,7 @@ package cn.ffast.core.support;
 import cn.ffast.core.annotations.Log;
 import cn.ffast.core.redis.RedisCacheUtils;
 import cn.ffast.core.utils.FStringUtil;
+import cn.ffast.core.utils.ReflectionUtils;
 import cn.ffast.core.vo.ServiceResult;
 import cn.ffast.core.vo.ServiceRowsResult;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -68,12 +69,9 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
     }
 
 
-
-
     @Override
     @Log("更新记录")
     public ServiceResult update(T m, boolean updateAllColumn, String[] ignoreProperties) {
-        logger.debug("更新记录");
         ServiceResult result = new ServiceResult(false);
         if (m == null || m.getId() == null) {
             result.setMessage("请指定要修改记录");
@@ -86,13 +84,20 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
         }
         boolean status = false;
         if (m != null && oldM != null) {
-            // 是否更新所有字段
-            if (updateAllColumn) {
-                // 将旧记录和修改的记录合并
-                BeanUtils.copyProperties(m, oldM, ignoreProperties);
-                status = updateAllColumnById(oldM);
-            } else {
-                status = updateById(m);
+            try {
+                // 是否更新所有字段
+                if (updateAllColumn) {
+                    // 将旧记录和修改的记录合并
+                    BeanUtils.copyProperties(m, oldM, ignoreProperties);
+                    status = updateAllColumnById(oldM);
+                } else {
+                    ReflectionUtils.reflectClassValueToNull(m, ignoreProperties);
+                    status = updateById(m);
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                result.setMessage("更新异常！");
+                return result;
             }
         }
         if (status) {

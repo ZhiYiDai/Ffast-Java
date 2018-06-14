@@ -8,14 +8,16 @@ public class CollectionUtils {
 
     public static <E> String arraryToString(Collection<E> collection) {
         Iterator<E> it = collection.iterator();
-        if (!it.hasNext())
+        if (!it.hasNext()) {
             return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (; ; ) {
             E e = it.next();
             sb.append(e == collection ? "(this Collection)" : e);
-            if (!it.hasNext())
+            if (!it.hasNext()) {
                 return sb.toString();
+            }
             sb.append(',');
         }
     }

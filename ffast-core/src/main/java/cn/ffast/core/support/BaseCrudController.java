@@ -279,13 +279,14 @@ public abstract class BaseCrudController<T extends BaseEntity, S extends ICrudSe
     }
 
 
+
+    final static String[] ignore = {"create_time", "creator_id"};
     /**
      * 从注解配置获得是否更新所有字段
      *
      * @return
      */
     private String[] getUpdateIgnoreProperties(CrudConfig crudConfig) {
-        String[] ignore = {"create_time", "creator_id"};
         if (crudConfig != null) {
             return ArrayUtils.addAll(ignore, crudConfig.updateIgnoreProperties());
         } else {

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.annotation.Resource;
 
 import cn.ffast.web.service.sys.IDictService;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/sys/dict")
 @Permission(value = "dict")
 @Log("字典")
-public class DictController extends BaseCrudController<Dict,IDictService,Long> {
+public class DictController extends BaseCrudController<Dict, IDictService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(DictController.class);
 
@@ -49,13 +50,14 @@ public class DictController extends BaseCrudController<Dict,IDictService,Long> {
 
     /**
      * 获得字典
+     *
      * @param type
      * @param isName
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/get")
-    public ServiceResult getDict(String type,Boolean isName){
-        return getService().getDict(type,isName);
+    public ServiceResult getDict(String type, Boolean isName) {
+        return getService().getDict(type, isName);
     }
 }
