@@ -1,22 +1,27 @@
 # Ffast-Java
-Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发解决方案
+Ffast 基于Srping boot 2 + Mybatis Plus后台管理系统前后分离快速开发解决方案
 
 ## 简 介
 ``` bash
     Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发解决方案，并具备以下特点
-    1.在Mybatis Plus基础上封装了基础增删改Service Controller
-    2.增删改查CrudController CrudService 支持提供灵活的 删除前,删除后,查询前,查询后,更新前,更新后,增加前,增加后方法提供给子类扩展。
-    3.可以在application.yml进行项目参数配置
-    4.redis序列化方式可以配置化，支持msgpack  jackson fastjson ，并可以使用RedisUtils工具类进行不同的序列方式缓存
-    5.Session 存放方式可配置化，支持Redis Jwt 两种方式
-    6.封装了权限验证注解，登录拦截注解、日志注解、增删改查配置注解、简单方便。
 ```  
-## 前端解决方案Ffast-FE 
+## 特点
+* 在Mybatis Plus基础上封装了基础增删改Service Controller。
+* 增删改查CrudController CrudService 支持提供灵活的增删改查前,增删改查后方法提供给子类扩展。
+* 提供CrudConfig增删改查配置注解，可设置查询字段 默认排序字段 是否更新所有字段 更新排除字段...
+* 提供Permission权限注册注解，Logined登录拦截注解,统一的拦截器进行拦截。
+* 可以在application.yml进行项目参数配置。
+* Redis序列化方式可以配置化，支持msgpack  jackson fastjson ，并可以使用RedisUtils工具类进行不同的序列方式缓存
+* Session 存放可配置化，支持Redis Jwt 两种方式。
+* 封装了权限验证注解，登录拦截注解、日志注解、增删改查配置注解、简单方便。
+* 使用Flyway进行数据库版本管理，无需导入sql只需配置好数据库配置即可自动执行sql。
+
+### 前端解决方案Ffast-FE 
 ``` bash
     Ffast-FE 是一套基于vue iview后台管理系统前端快速开发解决方案
     详细地址 https://github.com/ZhiYiDai/Ffast-FE 
 ```  
-## 项目结构
+### 项目结构
 ``` bash
     Ffast
     ├── ffast-admin -- 后台管理系统
@@ -38,6 +43,15 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
 ``` bash
     1.代码生成器
 ``` 
+
+### 后端部署
+
+* git clone 项目
+* 修改application-dev.yml，更新MySQL与Redis配置
+* IDEA导入项目展开ffast-parent 右键pom.xml 选择add maven project添加为maven项目并下载相关jar包
+* IDEA运行ffast-admin项目下的WebApplication.java，则可启动项目
+
+
 ## 增删改查Controller
 ``` bash
     @Controller
@@ -169,4 +183,27 @@ Ffast 基于Srping boot + Mybatis Plus后台管理系统前后分离快速开发
         }
     }
 ```   
+
+### 效果图
+
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page1.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page2.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page3.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page4.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page5.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page6.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page7.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page8.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page9.jpg)
+![image](https://gitee.com/cvb1234/Ffast-FE/raw/master/demo/page10.jpg)
+
+### 增删改查配置（@CrudConfig）
+* updateAllColumn 是否更新所有字段
+* properties 查询字段
+* simpleProperties 简单的查询字段
+* sortField 默认排序字段
+* isAsc 默认是否升序
+* updateIgnoreProperties 增加接口权限名
+
+
 > 更多详细请阅读代码,说明文档完善中...
