@@ -96,10 +96,12 @@ public class AuthServiceImpl implements IAuthService {
             List<String> roleNames = getMenuPerms ? new ArrayList<>(roleSize) : null;
             List<String> mains = getMenuPerms ? new ArrayList<>(roleSize) : null;
             for (Role r : roles) {
-                roleIds.add(r.getId());
-                if (getMenuPerms) {
-                    roleNames.add(r.getName());
-                    mains.add(r.getMain());
+                if (r != null) {
+                    roleIds.add(r.getId());
+                    if (getMenuPerms) {
+                        roleNames.add(r.getName());
+                        mains.add(r.getMain());
+                    }
                 }
             }
             curLoginUser.setHasRoleId(roleIds);

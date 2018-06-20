@@ -3,13 +3,17 @@ package cn.ffast.web.service.impl.sys;
 
 import cn.ffast.core.support.CrudServiceImpl;
 import cn.ffast.web.dao.sys.RoleMapper;
+import cn.ffast.web.dao.sys.UserRoleMapper;
 import cn.ffast.web.entity.sys.Role;
+import cn.ffast.web.entity.sys.UserRole;
 import cn.ffast.web.service.sys.IRoleService;
 import cn.ffast.core.vo.ServiceResult;
 import cn.ffast.core.vo.ServiceRowsResult;
+import cn.ffast.web.service.sys.IUserRoleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,6 +25,10 @@ import java.util.List;
  */
 @Service
 public class RoleServiceImpl extends CrudServiceImpl<RoleMapper, Role, Long> implements IRoleService {
+
+    @Resource
+    UserRoleMapper userRoleMapper;
+
 
     @Override
     protected ServiceRowsResult listBefore(Role m, EntityWrapper<Role> ew) {
@@ -62,6 +70,15 @@ public class RoleServiceImpl extends CrudServiceImpl<RoleMapper, Role, Long> imp
                 return new ServiceResult(false).setMessage("无法删除系统角色:" + role.getName());
             }
         }
+        return null;
+    }
+
+    @Override
+    protected ServiceResult deleteAfter(String ids) {
+        // 删除账号角色
+        EntityWrapper deleteEw = new EntityWrapper<UserRole>();
+        deleteEw.in("role_id", ids);
+        userRoleMapper.delete(deleteEw);
         return null;
     }
 
