@@ -10,9 +10,11 @@ import cn.ffast.web.entity.sys.ScheduleJob;
 
 import cn.ffast.web.service.sys.ScheduleJobService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 /**
  * @description: 定时任务
@@ -25,7 +27,8 @@ import java.util.Map;
 @RequestMapping("/api/sys/schedule")
 @Permission("schedule")
 public class ScheduleJobController extends BaseCrudController<ScheduleJob, ScheduleJobService, Long> {
-    @Autowired
+    private static Logger logger = LoggerFactory.getLogger(ScheduleJobController.class);
+    @Resource
     private ScheduleJobService service;
 
 
@@ -83,6 +86,6 @@ public class ScheduleJobController extends BaseCrudController<ScheduleJob, Sched
 
     @Override
     protected Logger getLogger() {
-        return null;
+        return logger;
     }
 }

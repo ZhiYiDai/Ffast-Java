@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `t_schedule_job_log`;
 CREATE TABLE `t_schedule_job_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志id',
   `job_id` bigint(20) NOT NULL COMMENT '任务id',
+  `name` varchar(200) DEFAULT NULL COMMENT '任务名称',
   `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
   `method_name` varchar(100) DEFAULT NULL COMMENT '方法名',
   `params` varchar(2000) DEFAULT NULL COMMENT '参数',
