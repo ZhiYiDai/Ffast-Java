@@ -39,6 +39,7 @@
         <mybatis-puls.version>2.3</mybatis-puls.version>
         <mybatis.version>3.4.2</mybatis.version>
         <commons-beanutils.version>1.8.3</commons-beanutils.version>
+        <quartz.version>2.3.0</quartz.version>
         <!-- log -->
         <logback-classic.version>1.1.7</logback-classic.version>
         <logback-ext-spring.version>0.1.4</logback-ext-spring.version>

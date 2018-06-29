@@ -10,6 +10,8 @@ import cn.ffast.core.vo.ServiceRowsResult;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -118,7 +120,7 @@ public class CrudServiceImpl<M extends BaseMapper<T>, T extends BaseEntity, ID e
     public ServiceResult mulDelete(String ids) {
         ServiceResult result = new ServiceResult(false);
         String[] idArray = FStringUtil.split(ids);
-        if (idArray == null || idArray.length == 0) {
+        if (ArrayUtils.isEmpty(idArray)) {
             result.setMessage("请选择要删除的数据行");
         } else {
             EntityWrapper ew = new EntityWrapper<T>();

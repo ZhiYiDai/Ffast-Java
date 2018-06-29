@@ -3,6 +3,7 @@ package cn.ffast.web.service.impl.sys;
 
 import cn.ffast.core.support.CrudServiceImpl;
 
+import cn.ffast.core.utils.CollectionUtils;
 import cn.ffast.web.dao.sys.RoleResMapper;
 import cn.ffast.web.entity.sys.Res;
 import cn.ffast.web.entity.sys.RoleRes;
@@ -12,7 +13,7 @@ import cn.ffast.core.vo.Menu;
 import cn.ffast.web.vo.RoleMenuPerms;
 import cn.ffast.core.vo.ServiceResult;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.toolkit.CollectionUtils;
+
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -116,7 +117,7 @@ public class RoleResServiceImpl extends CrudServiceImpl<RoleResMapper, RoleRes, 
         ew.setSqlSelect("res_id");
         List<RoleRes> roleResList = selectList(ew);
         List<Long> resIds = new ArrayList<>();
-        if (roleResList != null && roleResList.size() > 0) {
+        if (CollectionUtils.isNotEmpty(roleResList)) {
             for (RoleRes roleRes : roleResList) {
                 resIds.add(roleRes.getResId());
             }
@@ -129,7 +130,7 @@ public class RoleResServiceImpl extends CrudServiceImpl<RoleResMapper, RoleRes, 
     public Set<String> getRoleResIdentitys(Long roleId) {
         List<Res> roleResList = baseMapper.listByRoleId(roleId.toString(), new Integer(2));
         Set<String> identitys = new HashSet<>();
-        if (roleResList != null && roleResList.size() > 0) {
+        if (CollectionUtils.isNotEmpty(roleResList)) {
             for (Res res : roleResList) {
                 identitys.add(res.getIdentity());
             }
