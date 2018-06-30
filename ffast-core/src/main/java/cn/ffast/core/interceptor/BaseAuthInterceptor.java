@@ -4,7 +4,7 @@ package cn.ffast.core.interceptor;
 import cn.ffast.core.annotations.Logined;
 import cn.ffast.core.annotations.Permission;
 import cn.ffast.core.auth.OperatorUtils;
-import cn.ffast.core.utils.ResultCode;
+import cn.ffast.core.constant.ResultCode;
 import cn.ffast.core.auth.OperatorBase;
 import cn.ffast.core.vo.ServiceResult;
 import com.baomidou.mybatisplus.toolkit.ReflectionKit;
@@ -18,7 +18,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.ParameterizedType;
 import java.util.Set;
 
 /**

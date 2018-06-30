@@ -14,7 +14,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        a.content, a.operation, a.create_time AS createTime, a.creator_id AS creatorId
+        a.id,a.content, a.operation, a.create_time AS createTime, a.creator_id AS creatorId
     </sql>
 
     <select id="listByPage" resultType="cn.ffast.web.entity.sys.Log">
@@ -41,7 +41,8 @@
                 AND b.name like '%${creatorName}%'  <!-- 创建人 -->
             </if>
         </where>
-        order by a.create_time desc
+
+
     </select>
 
     <!--增改查范本-->

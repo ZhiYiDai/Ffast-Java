@@ -4,7 +4,7 @@ import cn.ffast.core.support.CrudServiceImpl;
 import cn.ffast.core.vo.ServiceResult;
 import cn.ffast.web.dao.sys.ScheduleJobMapper;
 import cn.ffast.web.entity.sys.ScheduleJob;
-import cn.ffast.web.schedule.ScheduleStatus;
+import cn.ffast.core.constant.ScheduleStatus;
 import cn.ffast.web.schedule.ScheduleUtils;
 import cn.ffast.web.service.sys.ScheduleJobService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;

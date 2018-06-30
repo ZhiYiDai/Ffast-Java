@@ -1,6 +1,6 @@
 package cn.ffast.core.handler;
 
-import cn.ffast.core.utils.ResultCode;
+import cn.ffast.core.constant.ResultCode;
 import cn.ffast.core.vo.ServiceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

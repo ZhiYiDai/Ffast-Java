@@ -1,6 +1,7 @@
 package cn.ffast.web.schedule;
 
 
+import cn.ffast.core.constant.ScheduleStatus;
 import cn.ffast.web.entity.sys.ScheduleJob;
 import org.quartz.*;
 /**
