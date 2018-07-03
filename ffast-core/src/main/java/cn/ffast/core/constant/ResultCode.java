@@ -1,4 +1,4 @@
-package cn.ffast.core.utils;
+package cn.ffast.core.constant;
 
 /**
  * @author daizhiyi

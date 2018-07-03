@@ -1,4 +1,4 @@
-package cn.ffast.web.schedule;
+package cn.ffast.core.constant;
 
 public enum ScheduleStatus {
     /**
