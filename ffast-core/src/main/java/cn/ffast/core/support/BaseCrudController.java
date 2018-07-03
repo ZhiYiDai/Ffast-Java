@@ -7,6 +7,7 @@ import cn.ffast.core.utils.AnnotationUtils;
 import cn.ffast.core.vo.ServiceResult;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -118,7 +120,10 @@ public abstract class BaseCrudController<T extends BaseEntity, S extends ICrudSe
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @Permission(value = "create")
-    public ServiceResult create(T m) {
+    public ServiceResult create(@Valid T m, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ServiceResult(false).setMessage(bindingResult.getFieldError().getDefaultMessage());
+        }
         m.setCreatorId(getLoginUserId());
         ServiceResult beforeResult = createBefore(m);
         if (beforeResult != null) {
@@ -138,7 +143,10 @@ public abstract class BaseCrudController<T extends BaseEntity, S extends ICrudSe
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @Permission(value = "update")
-    public ServiceResult update(T m) {
+    public ServiceResult update(@Valid T m, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ServiceResult(false).setMessage(bindingResult.getFieldError().getDefaultMessage());
+        }
         m.setLastModifierId(getLoginUserId());
         ServiceResult beforeResult = updateBefore(m);
         if (beforeResult != null) {
