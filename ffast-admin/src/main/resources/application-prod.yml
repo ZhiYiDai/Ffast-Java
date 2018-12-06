@@ -1,5 +1,5 @@
 server:
-  port: 7070
+  port: 8080
   #servlet:
     #contextPath: /api/
 spring:
