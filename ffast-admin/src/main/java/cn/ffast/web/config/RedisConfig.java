@@ -30,18 +30,14 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
-
+    //序列化类型
     @Value("${spring.redis.serializerType}")
     private int serializerType;
-
+    //过期时间（秒）
     @Value("${spring.redis.expirationSecond}")
     private int expirationSecondTime;
 
 
-
-    static {
-
-    }
 
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory factory) {

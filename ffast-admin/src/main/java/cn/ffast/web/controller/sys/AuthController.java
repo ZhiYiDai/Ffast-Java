@@ -71,7 +71,7 @@ public class AuthController extends BaseController {
     }
 
     /**
-     * 退出登录
+     * 验证码获取
      *
      * @return
      */

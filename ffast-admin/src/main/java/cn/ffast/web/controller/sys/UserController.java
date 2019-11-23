@@ -136,7 +136,11 @@ public class UserController extends BaseCrudController<User, IUserService, Long>
         return service.respwd(operatorUtils.getLoginUserId(), pwd, newpwd, newpwd2);
     }
 
-
+    /**
+     * 用户更新前
+     * @param m
+     * @return
+     */
     @Override
     protected ServiceResult updateBefore(User m) {
         // Demo限制（可以删除）：修改用户前判断，不允许修改admin账户

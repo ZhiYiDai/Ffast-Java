@@ -32,8 +32,8 @@ import java.io.*;
 @Controller
 @RequestMapping("/api/sys/attach")
 @Logined
-@Permission(value = "auth")
-@Log("附件")
+@Permission(value = "attach")
+@Log("附件管理")
 public class AttachController extends BaseCrudController<Attach, IAttachService, Long> {
 
     private static Logger logger = LoggerFactory.getLogger(AttachController.class);

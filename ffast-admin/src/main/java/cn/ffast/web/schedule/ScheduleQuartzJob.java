@@ -76,7 +76,8 @@ public class ScheduleQuartzJob extends QuartzJobBean {
             log.setStatus(0);
             log.setError(StringUtils.substring(e.toString(), 0, 2000));
         } finally {
-            scheduleJobLogService.insert(log);
+            //由于有人添加1秒一次的任务导致日志数量飙升,演示版本，关闭定时任务日志插入
+            //scheduleJobLogService.insert(log);
         }
     }
 }
